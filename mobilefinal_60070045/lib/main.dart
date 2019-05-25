@@ -30,8 +30,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: white,
+        iconTheme: IconThemeData(color: Color(0xFF4e69a2)),
       ),
       initialRoute: "/",
+      
       routes: {
         "/": (context) => Login(),
         "/register": (context) => Register(),

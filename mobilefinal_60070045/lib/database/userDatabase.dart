@@ -15,9 +15,7 @@ class User_information {
   String age;
   String password;
   String quote;
-
   User_information();
-
   User_information.formMap(Map<String, dynamic> map) {
     this.id = map[idColumn];
     this.userid = map[useridColumn];
@@ -26,7 +24,6 @@ class User_information {
     this.password = map[passwordColumn];
     this.quote = map[quoteColumn];
   }
-
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       useridColumn: userid,
@@ -48,10 +45,9 @@ class User_information {
 }
 
 class User_data {
-  Database db;
-
+  Database database;
   Future open(String path) async {
-    db = await openDatabase(path, version: 1,
+    database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute('''
       create table $userTable (
@@ -66,12 +62,8 @@ class User_data {
     });
   }
 
-  Future<int> deleteUser(int id) async {
-    return await db.delete(userTable, where: '$idColumn = ?', whereArgs: [id]);
-  }
-
   Future<User_information> getUser(int id) async {
-    List<Map<String, dynamic>> maps = await db.query(userTable,
+    List<Map<String, dynamic>> maps = await database.query(userTable,
         columns: [
           idColumn,
           useridColumn,
@@ -86,13 +78,18 @@ class User_data {
   }
 
   Future<int> updateUser(User_information user) async {
-    return db.update(userTable, user.toMap(),
+    return database.update(userTable, user.toMap(),
         where: '$idColumn = ?', whereArgs: [user.id]);
+  }
+
+  Future<int> deleteUser(int id) async {
+    return await database
+        .delete(userTable, where: '$idColumn = ?', whereArgs: [id]);
   }
 
   Future<List<User_information>> getAllUser() async {
     await this.open("user.db");
-    var res = await db.query(userTable, columns: [
+    var res = await database.query(userTable, columns: [
       idColumn,
       useridColumn,
       nameColumn,
@@ -107,9 +104,9 @@ class User_data {
   }
 
   Future<User_information> insertUser(User_information user) async {
-    user.id = await db.insert(userTable, user.toMap());
+    user.id = await database.insert(userTable, user.toMap());
     return user;
   }
 
-  Future close() async => db.close();
+  Future close() async => database.close();
 }

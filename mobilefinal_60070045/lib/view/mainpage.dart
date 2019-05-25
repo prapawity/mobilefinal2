@@ -15,7 +15,7 @@ class MainPage extends StatefulWidget {
 
 class MainPageState extends State<MainPage> {
   String data = '';
-
+  String nameus = CurrentUser_state.NAME;
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
     // For your reference print the AppDoc directory
@@ -28,6 +28,7 @@ class MainPageState extends State<MainPage> {
   }
 
   Future<String> readcontent() async {
+    getname();
     try {
       final file = await _localFile;
       String contents = await file.readAsString();
@@ -42,6 +43,12 @@ class MainPageState extends State<MainPage> {
     } catch (e) {
       return 'Error';
     }
+  }
+
+  getname() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    this.nameus = await sharedPreferences.getString('nameuser');
+    print(nameus);
   }
 
   @override
@@ -66,7 +73,7 @@ class MainPageState extends State<MainPage> {
           padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
           children: <Widget>[
             ListTile(
-              title: Text('Hello ${CurrentUser_state.NAME}'),
+              title: Text('Hello $nameus'),
               subtitle: Text(
                   'this is my quote "${CurrentUser_state.QUOTE != null ? CurrentUser_state.QUOTE == '' ? 'ยังไม่มีการระบุข้อมูล' : data != CurrentUser_state.QUOTE ? CurrentUser_state.QUOTE : data : 'ยังไม่มีการระบุข้อมูล'}"'),
             ),

@@ -55,7 +55,7 @@ class RegisterPageState extends State<Register>{
               decoration: InputDecoration(
                 labelText: "User Id",
                 hintText: "User Id must be between 6 to 12",
-                icon: Icon(Icons.account_box, size: 40, color: Colors.grey),
+                icon: Icon(Icons.account_box, size: 40, color: Color(0xFF4e69a2)),
               ),
               controller: userid,
               keyboardType: TextInputType.text,
@@ -75,7 +75,7 @@ class RegisterPageState extends State<Register>{
               decoration: InputDecoration(
                 labelText: "Name",
                 hintText: "ex. 'John Snow'",
-                icon: Icon(Icons.account_circle, size: 40, color: Colors.grey),
+                icon: Icon(Icons.account_circle, size: 40, color: Color(0xFF4e69a2)),
               ),
               controller: name,
               keyboardType: TextInputType.text,
@@ -92,7 +92,7 @@ class RegisterPageState extends State<Register>{
               decoration: InputDecoration(
                 labelText: "Age",
                 hintText: "Please fill Age Between 10 to 80",
-                icon: Icon(Icons.event_note, size: 40, color: Colors.grey),
+                icon: Icon(Icons.event_note, size: 40,color: Color(0xFF4e69a2),),
               ),
               controller: age,
               keyboardType: TextInputType.number,
@@ -109,7 +109,7 @@ class RegisterPageState extends State<Register>{
               decoration: InputDecoration(
                 labelText: "Password",
                 hintText: "Password must be longer than 6",
-                icon: Icon(Icons.lock, size: 40, color: Colors.grey),
+                icon: Icon(Icons.lock_outline, size: 40, color: Color(0xFF4e69a2)),
               ),
               controller: password,
               obscureText: true,

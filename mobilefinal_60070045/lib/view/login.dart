@@ -85,7 +85,7 @@ class LoginPageState extends State<Login> {
             TextFormField(
                 decoration: InputDecoration(
                   labelText: "User Id",
-                  icon: Icon(Icons.account_box, size: 40, color: Colors.grey),
+                  icon: Icon(Icons.account_box, size: 40, color: Color(0xFF4e69a2)),
                 ),
                 controller: userid,
                 keyboardType: TextInputType.text,
@@ -97,7 +97,7 @@ class LoginPageState extends State<Login> {
             TextFormField(
                 decoration: InputDecoration(
                   labelText: "Password",
-                  icon: Icon(Icons.lock, size: 40, color: Colors.grey),
+                  icon: Icon(Icons.lock_outline, size: 40, color: Color(0xFF4e69a2)),
                 ),
                 controller: password,
                 obscureText: true,
@@ -135,6 +135,8 @@ class LoginPageState extends State<Login> {
                           "username", userList[i].userid);
                       sharedPreferences.setString(
                           "password", userList[i].password);
+                      sharedPreferences.setString(
+                          "nameuser", userList[i].name);
                       break;
                     }
                   }

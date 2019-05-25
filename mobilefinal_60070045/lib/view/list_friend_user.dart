@@ -64,7 +64,8 @@ class List_friend_state extends State<List_Friend_Current_User> {
         child: Column(
           children: <Widget>[
             RaisedButton(
-              child: Text("BACK"),
+              color: Colors.white,
+              child: Text("BACK",style: TextStyle(color: Color(0xFF4e69a2)),),
               onPressed: () {
                 Navigator.of(context).pop(context);
               },
@@ -114,20 +115,20 @@ class List_friend_state extends State<List_Friend_Current_User> {
                     Text(
                       "${(values[index].id).toString()} : ${values[index].name}",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                     ),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 10)),
+                    Padding(padding: EdgeInsets.fromLTRB(0, 12, 0, 10)),
                     Text(
                       values[index].email,
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 14),
                     ),
                     Text(
                       values[index].phone,
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 14),
                     ),
                     Text(
                       values[index].website,
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 14),
                     ),
                   ],
                 ),

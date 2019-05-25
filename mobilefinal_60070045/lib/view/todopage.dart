@@ -62,7 +62,8 @@ class TodoPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             RaisedButton(
-              child: Text("BACK"),
+              color: Colors.white,
+              child: Text("BACK",style: TextStyle(color: Color(0xFF4e69a2)),),
               onPressed: (){
                 Navigator.pop(context);
               },
@@ -106,18 +107,18 @@ class TodoPage extends StatelessWidget {
                   (values[index].id).toString(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24
+                    fontSize: 22
                   ),
                 ),
-                Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 10)),
+                Padding(padding: EdgeInsets.fromLTRB(0, 12, 0, 10)),
                 Text(
                   values[index].title,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 15),
                 ),
                 Padding(padding: EdgeInsets.all(10),),
                 Text(
                   values[index].completed,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,),
                 ),
               ],
             ),

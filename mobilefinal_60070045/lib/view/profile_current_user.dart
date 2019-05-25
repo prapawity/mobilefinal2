@@ -75,7 +75,7 @@ class Profile_User_State extends State<Profile_User> {
                       labelText: "User Id",
                       hintText: "User Id must be between 6 to 12",
                       icon:
-                          Icon(Icons.account_box, size: 40, color: Colors.grey),
+                          Icon(Icons.account_box, size: 40, color: Color(0xFF4e69a2)),
                     ),
                     controller: userid,
                     keyboardType: TextInputType.text,
@@ -93,7 +93,7 @@ class Profile_User_State extends State<Profile_User> {
                       labelText: "Name",
                       hintText: "ex. 'John Snow'",
                       icon: Icon(Icons.account_circle,
-                          size: 40, color: Colors.grey),
+                          size: 40, color: Color(0xFF4e69a2)),
                     ),
                     controller: name,
                     keyboardType: TextInputType.text,
@@ -109,7 +109,7 @@ class Profile_User_State extends State<Profile_User> {
                       labelText: "Age",
                       hintText: "Please fill Age Between 10 to 80",
                       icon:
-                          Icon(Icons.event_note, size: 40, color: Colors.grey),
+                          Icon(Icons.event_note, size: 40, color: Color(0xFF4e69a2)),
                     ),
                     controller: age,
                     keyboardType: TextInputType.number,
@@ -126,7 +126,7 @@ class Profile_User_State extends State<Profile_User> {
                     decoration: InputDecoration(
                       labelText: "Password",
                       hintText: "Password must be longer than 6",
-                      icon: Icon(Icons.lock, size: 40, color: Colors.grey),
+                      icon: Icon(Icons.lock_outline, size: 40, color: Color(0xFF4e69a2)),
                     ),
                     controller: password,
                     obscureText: true,
@@ -141,14 +141,15 @@ class Profile_User_State extends State<Profile_User> {
                       labelText: "Quote",
                       hintText: "Explain you self!",
                       icon: Icon(Icons.settings_system_daydream,
-                          size: 40, color: Colors.grey),
+                          size: 40, color: Color(0xFF4e69a2)),
                     ),
                     controller: quote,
                     keyboardType: TextInputType.text,
                     maxLines: 5),
                 Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 10)),
                 RaisedButton(
-                    child: Text("SAVE"),
+                  color: Color(0xFF4e69a2),
+                    child: Text("SAVE",style: TextStyle(color: Colors.white),),
                     onPressed: () async {
                       await user.open("user.db");
                       Future<List<User_information>> allUser = user.getAllUser();
