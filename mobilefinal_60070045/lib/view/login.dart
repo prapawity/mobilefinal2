@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobilefinal_60070045/database/userDatabase.dart';
-
 import 'package:toast/toast.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../user_state_login.dart';
 
 SharedPreferences sharedPreferences;
@@ -15,98 +12,58 @@ class Login extends StatefulWidget {
     return LoginPageState();
   }
 }
+
 class LoginPageState extends State<Login> {
   final _formkey = GlobalKey<FormState>();
   User_data user = User_data();
   final userid = TextEditingController();
   final password = TextEditingController();
   bool isValid = false;
-  int formState = 0;
+  int form_status = 0;
   @override
   void setState(fn) {
-    // TODO: implement setState
     super.setState(fn);
-    checkstate_user(String user_in, String password_in) async {
-      await user.open("user.db");
-      Future<List<User_information>> allUser = user.getAllUser();
-      Future isUserValid(String userid, String password) async {
-        var userList_all_data = await allUser;
-        for (var i = 0; i < userList_all_data.length; i++) {
-          if (user_in == userList_all_data[i].userid &&
-              password_in == userList_all_data[i].password) {
-            CurrentUser_state.ID = userList_all_data[i].id;
-            CurrentUser_state.USERID = userList_all_data[i].userid;
-            CurrentUser_state.PASSWORD = userList_all_data[i].password;
-            CurrentUser_state.NAME = userList_all_data[i].name;
-            CurrentUser_state.AGE = userList_all_data[i].age;
-            CurrentUser_state.QUOTE = userList_all_data[i].quote;
-            this.isValid = true;
-            sharedPreferences = await SharedPreferences.getInstance();
-            sharedPreferences.setString("username", userList_all_data[i].userid);
-            sharedPreferences.setString("password", userList_all_data[i].password);
-            break;
-          }
-        }
-      }
-      isUserValid(user_in, password_in);
-      print(this.isValid);
-      if (this.isValid == true) {
-        return Navigator.pushReplacementNamed(context, '/home');
-      }
-    }
-    checkUser_login() async {
-      sharedPreferences = await SharedPreferences.getInstance();
-      String user_state = sharedPreferences.getString('username');
-      String password_state = sharedPreferences.getString('password');
-      if (user_state != "" && user_state != null) {
-        checkstate_user(user_state, password_state);
-      }
-    }
-
-    checkUser_login();
   }
 
   @override
   Widget build(BuildContext context) {
     setState(() {
-      chk2(String userchk, String passwordchk) async {
+      Check_from_all_User(String user_in, String password_in) async {
         await user.open("user.db");
         Future<List<User_information>> allUser = user.getAllUser();
         Future isUserValid(String userid, String password) async {
           var userList = await allUser;
           for (var i = 0; i < userList.length; i++) {
-            print('${userid} == ${userList[i].userid} ${password} == ${userList[i].password}');
             if (userid == userList[i].userid &&
                 password == userList[i].password) {
+              this.isValid = true;
               CurrentUser_state.ID = userList[i].id;
               CurrentUser_state.USERID = userList[i].userid;
               CurrentUser_state.NAME = userList[i].name;
               CurrentUser_state.AGE = userList[i].age;
               CurrentUser_state.PASSWORD = userList[i].password;
               CurrentUser_state.QUOTE = userList[i].quote;
-              this.isValid = true;
               sharedPreferences = await SharedPreferences.getInstance();
               sharedPreferences.setString("username", userList[i].userid);
               sharedPreferences.setString("password", userList[i].password);
-              return Navigator.pushReplacementNamed(context, '/home');
-              break;
+              return Navigator.pushReplacementNamed(context, '/mainpage');
             }
           }
         }
-        isUserValid(userchk, passwordchk);
+
+        isUserValid(user_in, password_in);
       }
 
-      getCredential() async {
+      Check_State_User() async {
         sharedPreferences = await SharedPreferences.getInstance();
-        String userchk = sharedPreferences.getString('username');
-        String passwordchk = sharedPreferences.getString('password');
-        if (userchk != "" && userchk != null) {
-          chk2(userchk, passwordchk);
+        String user_now = sharedPreferences.getString('username');
+        String password_now = sharedPreferences.getString('password');
+        if (user_now != "" && user_now != null) {
+          Check_from_all_User(user_now, password_now);
         }
-        print(userchk);
       }
 
-      getCredential();
+      Check_State_User();
     });
     return Scaffold(
       appBar: AppBar(
@@ -120,24 +77,21 @@ class LoginPageState extends State<Login> {
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              // child: Image.asset(
-              //   "assets/banner.jpg",
-              //   width: 200,
-              //   height: 200,
-                
-              // ),
-              child: Image.network('https://pbs.twimg.com/profile_images/1111648583462191104/JnfJPVuq_400x400.jpg',width:200,height:200),
+              child: Image.network(
+                  'https://www.coplus.co.uk/wp-content/uploads/2017/09/Website-key-icon-green.png',
+                  width: 200,
+                  height: 200),
             ),
             TextFormField(
                 decoration: InputDecoration(
-                  labelText: "UserId",
+                  labelText: "User Id",
                   icon: Icon(Icons.account_box, size: 40, color: Colors.grey),
                 ),
                 controller: userid,
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value.isNotEmpty) {
-                    this.formState += 1;
+                    this.form_status += 1;
                   }
                 }),
             TextFormField(
@@ -150,29 +104,32 @@ class LoginPageState extends State<Login> {
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value.isNotEmpty) {
-                    this.formState += 1;
+                    this.form_status += 1;
                   }
                 }),
             Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 10)),
             RaisedButton(
-              child: Text("Login"),
+              color: Color(0xFF4e69a2),
+              child: Text(
+                "Login",
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: () async {
                 _formkey.currentState.validate();
                 await user.open("user.db");
                 Future<List<User_information>> allUser = user.getAllUser();
-
                 Future isUserValid(String userid, String password) async {
                   var userList = await allUser;
                   for (var i = 0; i < userList.length; i++) {
                     if (userid == userList[i].userid &&
                         password == userList[i].password) {
+                      this.isValid = true;
                       CurrentUser_state.ID = userList[i].id;
                       CurrentUser_state.USERID = userList[i].userid;
                       CurrentUser_state.NAME = userList[i].name;
                       CurrentUser_state.AGE = userList[i].age;
                       CurrentUser_state.PASSWORD = userList[i].password;
                       CurrentUser_state.QUOTE = userList[i].quote;
-                      this.isValid = true;
                       sharedPreferences = await SharedPreferences.getInstance();
                       sharedPreferences.setString(
                           "username", userList[i].userid);
@@ -182,30 +139,27 @@ class LoginPageState extends State<Login> {
                     }
                   }
                 }
-
-                if (this.formState != 2) {
+                if (this.form_status != 2) {
+                  this.form_status = 0;
                   Toast.show("Please fill out this form", context,
-                      duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-                  this.formState = 0;
+                      duration: Toast.LENGTH_SHORT,
+                      gravity: Toast.BOTTOM,
+                      backgroundColor: Colors.red);
+                  
                 } else {
-                  this.formState = 0;
+                  this.form_status = 0;
                   await isUserValid(userid.text, password.text);
                   if (!this.isValid) {
                     Toast.show("Invalid user or password", context,
-                        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+                        duration: Toast.LENGTH_SHORT,
+                        gravity: Toast.BOTTOM,
+                        backgroundColor: Colors.red);
                   } else {
                     Navigator.pushReplacementNamed(context, '/mainpage');
                     userid.text = "";
                     password.text = "";
                   }
                 }
-
-                Future showAllUser() async {
-                  var userList = await allUser;
-                  for (var i = 0; i < userList.length; i++) {}
-                }
-
-                showAllUser();
               },
             ),
             FlatButton(

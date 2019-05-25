@@ -63,7 +63,7 @@ class RegisterPageState extends State<Register>{
                   return "Please fill out this form";
                 }
                 else if (value.length < 6 || value.length > 12){
-                  return "Please fill UserId Correctly";
+                  return "Please fill UserId Correctly (character: 6 - 12)";
                 }
                 else if (this.isUserIn){
                   return "This Username is taken";
@@ -115,7 +115,7 @@ class RegisterPageState extends State<Register>{
               keyboardType: TextInputType.text,
               validator: (value) {
                 if (value.isEmpty || value.length <= 6) {
-                  return "กรุณากรอกข้อมูลให้ถูกต้อง";
+                  return "ํYour password must more 6 Character";
                 }
               }
             ),

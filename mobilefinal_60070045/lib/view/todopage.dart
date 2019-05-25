@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:async';
 
 Future<List<Todo>> fetchTodos(int userid) async {
-  final response = await http.get('https://jsonplaceholder.typicode.com/users/${userid}/todos');
+  final response = await http.get('https://jsonplaceholder.typicode.com/todos?userId=${userid}');
 
   List<Todo> todoApi = [];
 
