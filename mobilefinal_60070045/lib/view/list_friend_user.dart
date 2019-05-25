@@ -56,7 +56,7 @@ class List_friend_state extends State<List_Friend_Current_User> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Friends"),
+        title: Text("My All Friends"),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -76,7 +76,13 @@ class List_friend_state extends State<List_Friend_Current_User> {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
                     return Container(
-                      child: CircularProgressIndicator(),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[CircularProgressIndicator()],
+                        ),
+                      ),
                     );
                   default:
                     if (snapshot.hasError) {
@@ -100,6 +106,7 @@ class List_friend_state extends State<List_Friend_Current_User> {
         itemCount: values.length,
         itemBuilder: (BuildContext context, int index) {
           return new Card(
+            color: Color(0xffF7EE7F),
             child: InkWell(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -167,6 +167,8 @@ class LoginPageState extends State<Login> {
                 child: Text("register new user", textAlign: TextAlign.right),
               ),
               onPressed: () {
+                userid.text = '';
+                password.text = '';
                 Navigator.of(context).pushNamed('/register');
               },
               padding: EdgeInsets.only(left: 180.0),

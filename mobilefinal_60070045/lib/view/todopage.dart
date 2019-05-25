@@ -56,6 +56,7 @@ class TodoPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Todos"),
         automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: Container(
         child: Column(
@@ -72,7 +73,7 @@ class TodoPage extends StatelessWidget {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
-                    return new Text('loading...');
+                    return new Center(child: CircularProgressIndicator(),);
                   default:
                     if (snapshot.hasError){
                       return new Text('Error: ${snapshot.error}');
@@ -96,6 +97,7 @@ class TodoPage extends StatelessWidget {
         itemCount: values.length,
         itemBuilder: (BuildContext context, int index) {
           return new Card(
+            color: Color(0xffF1A66A),
             child: InkWell(
               child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

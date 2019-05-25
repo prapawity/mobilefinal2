@@ -4,7 +4,6 @@ import 'package:mobilefinal_60070045/view/login.dart';
 import 'package:mobilefinal_60070045/view/mainpage.dart';
 import 'package:mobilefinal_60070045/view/profile_current_user.dart';
 import 'package:mobilefinal_60070045/view/register_user.dart';
-
 void main() => runApp(MyApp());
 const MaterialColor white = const MaterialColor(
   0xFF4e69a2,

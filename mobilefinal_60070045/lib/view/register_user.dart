@@ -44,6 +44,7 @@ class RegisterPageState extends State<Register>{
     return Scaffold(
       appBar: AppBar(
         title: Text("Register"),
+        centerTitle: true,
       ),
       body: Form(
         key: _formkey,
@@ -121,7 +122,8 @@ class RegisterPageState extends State<Register>{
             ),
             Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 10)),
             RaisedButton(
-              child: Text("REGISTER NEW ACCOUNT"),
+              color: Color(0xFF4e69a2),
+              child: Text("REGISTER NEW ACCOUNT",style: TextStyle(color: Colors.white),),
               onPressed: () async {
                 await user.open("user.db");
                 Future<List<User_information>> allUser = user.getAllUser();

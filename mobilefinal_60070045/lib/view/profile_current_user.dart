@@ -63,6 +63,7 @@ class Profile_User_State extends State<Profile_User> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Profile Setup"),
+          centerTitle: true,
         ),
         body: Form(
           key: _formkey,
