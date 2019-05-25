@@ -12,36 +12,34 @@ class List_Friend_Current_User extends StatefulWidget {
   }
 }
 
-Future<List<User>> fetchUsers() async {
+Future<List<User_data>> fetchUsers() async {
   final response = await http.get('https://jsonplaceholder.typicode.com/users');
-
-  List<User> userApi = [];
-
+  List<User_data> userApi_data = [];
   if (response.statusCode == 200) {
     // If the call to the server was successful, parse the JSON
     var body = json.decode(response.body);
     for (int i = 0; i < body.length; i++) {
-      var user = User.fromJson(body[i]);
-      userApi.add(user);
+      var user = User_data.fromJson(body[i]);
+      userApi_data.add(user);
     }
-    return userApi;
+    return userApi_data;
   } else {
     // If that call was not successful, throw an error.
     throw Exception('Failed to load post');
   }
 }
 
-class User {
+class User_data {
   final int id;
   final String name;
   final String email;
   final String phone;
   final String website;
 
-  User({this.id, this.name, this.email, this.phone, this.website});
+  User_data({this.id, this.name, this.email, this.phone, this.website});
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory User_data.fromJson(Map<String, dynamic> json) {
+    return User_data(
       id: json['id'],
       name: json['name'],
       email: json['email'],
@@ -101,7 +99,7 @@ class List_friend_state extends State<List_Friend_Current_User> {
   }
 
   Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
-    List<User> values = snapshot.data;
+    List<User_data> values = snapshot.data;
     return new Expanded(
       child: new ListView.builder(
         itemCount: values.length,
